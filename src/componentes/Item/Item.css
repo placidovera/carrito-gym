@@ -1,0 +1,45 @@
+.col-dos {
+  background-color:#0f0f0f;
+  border: 2px solid #39ff14;
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.col-dos:hover {
+  background-color: white;
+}
+
+.col-dos img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.col-dos h3,
+.col-dos p {
+  color: #39ff14;
+  margin: 3px 0;
+}
+
+.col-dos button {
+  background-color: #39ff14;
+  border: none;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.col-dos button:hover {
+  background-color: #00ffff;
+  transform: scale(1.05);
+}
+.col-dos img{
+  width: 250px;
+  height: 300px;
+}
