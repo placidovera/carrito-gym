@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getUnProducto } from '../../assets/asycmocks'
+import {db} from "../Services/Config"
+import { getDoc,doc } from 'firebase/firestore'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
 
@@ -8,8 +9,15 @@ const ItemDetailContainer = () => {
   const {idItem}=useParams()
 
 useEffect(()=>{
-  getUnProducto(idItem)
-  .then(respuesta=> setProducto(respuesta))
+  const nuevoDoc = doc(db,"productos",idItem)
+
+  getDoc(nuevoDoc)
+  .then(res =>{
+    const data = res.data()
+    const nuevoProducto = {id: res.id,...data}
+    setProducto(nuevoProducto)
+  })
+  .catch(error => console.log(error))
     },[idItem]);
 return (
     <div>
