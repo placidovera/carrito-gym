@@ -1,6 +1,5 @@
 # 🏋️‍♂️ Productos Gym - Tienda de Suplementos Deportivos  
 
-![Banner](https://productos-gym.netlify.app/favicon.ico)  
 
 **Productos Gym** es una aplicación web diseñada para la compra de suplementos deportivos de manera rápida, sencilla y segura.  
 El proyecto está desplegado en **Netlify** y disponible en:  
