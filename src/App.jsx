@@ -3,7 +3,6 @@ import ItemDetailContainer from "./componentes/ItemDetailContainer/ItemDetailCon
 import ItemListContainer from "./componentes/ItemListContainer/ItemListContainer"
 import NavBar from "./componentes/NavBar/NavBar"
 import { CarritoProvider } from "./componentes/context/CarritoContext"
-import CartItem from "./componentes/CartItem/CartItem"
 import Cart from "./componentes/Cart/Cart"
 import Checkout from "./componentes/Checkout/Checkout"
 

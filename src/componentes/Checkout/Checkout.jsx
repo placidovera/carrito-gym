@@ -4,6 +4,7 @@ import "./Checkout.css"
 import { db } from "../Services/Config"
 import { addDoc, collection, updateDoc, doc, getDoc } from "firebase/firestore"
 import Confetti from "react-confetti"
+import { Link } from "react-router-dom"
 
 const Checkout = () => {
   const [nombre, setNombre] = useState("")
@@ -112,13 +113,14 @@ const Checkout = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <button type="submit">Confirmar Compra</button>
-
+        <Link to="/"><button >Volver al Inicio</button></Link>
         {ordenId && (
           <strong style={{ color: "white" }}>
             Gracias por su compra!! Su número de orden es: {ordenId}
           </strong>
         )}
       </form>
+  
     </div>
   )
 }

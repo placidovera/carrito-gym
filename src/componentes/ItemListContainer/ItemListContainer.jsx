@@ -4,18 +4,20 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import ItemList from "../ItemList/ItemList";
 import "../ItemListContainer/ItemListContainer.css";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const ItemListContainer = (props) => {
   const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { idCategoria } = useParams();
 
   useEffect(() => {
-    const productosRef = collection(db, "productos"); 
-
+    setLoading(true)
+   
     const misProductos = idCategoria
-      ? query(productosRef, where("idCat", "==", idCategoria))
-      : productosRef;
+      ? query(collection(db, "productos"), where("idCat", "==", idCategoria))
+      : collection(db, "productos");
 
     getDocs(misProductos)
       .then((res) => {
@@ -25,13 +27,18 @@ const ItemListContainer = (props) => {
         });
         setProductos(nuevosProductos);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(()=>{
+        console.log("Proceso Terminado")
+        setLoading(false)
+      })
   }, [idCategoria]);
 
   return (
     <>
       <h1 className="titulo-motivador">{props.texto}</h1>
-      <ItemList productos={productos} />
+      {loading ? <Loader/>:<ItemList productos={productos} />}
+      
     </>
   );
 };
