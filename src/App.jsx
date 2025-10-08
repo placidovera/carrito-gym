@@ -13,7 +13,7 @@ const App = () => {
     <CarritoProvider>
  <NavBar />
     <Routes>
-      <Route path="/" element={  <ItemListContainer texto="Today is the moment" />}></Route>
+      <Route path="/" element={  <ItemListContainer texto="Delivery 24 hs." />}></Route>
       <Route path="/categoria/:idCategoria" element={<ItemListContainer />}></Route>
       <Route path="/item/:idItem/" element={<ItemDetailContainer />}></Route>
       <Route path="/cart" element={<Cart/>}></Route>

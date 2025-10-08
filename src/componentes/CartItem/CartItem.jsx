@@ -8,7 +8,7 @@ const CartItem = ({item,cantidad}) => {
 
 
   return (
- <div style={{ borderBottom: '2px solid #39ff14' }}>
+ <div style={{ borderBottom: '2px solid #D4AF37' }}>
   <h3>{item.nombre}</h3>
   <p><strong>Cantidad: {cantidad}</strong></p>
   <p><strong>Precio: $ {item.precio}</strong></p>

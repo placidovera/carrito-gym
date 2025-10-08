@@ -1,6 +1,6 @@
 .col-dos {
   background-color:#0f0f0f;
-  border: 2px solid #39ff14;
+  border: 2px solid #D4AF37;
   border-radius: 10px;
   padding: 10px;
   transition: 0.3s;
@@ -21,12 +21,12 @@
 
 .col-dos h3,
 .col-dos p {
-  color: #39ff14;
+  color: #D4AF37;
   margin: 3px 0;
 }
 
 .col-dos button {
-  background-color: #39ff14;
+  background-color: #D4AF37;
   border: none;
   color: #000;
   padding: 5px 10px;
@@ -36,7 +36,7 @@
 }
 
 .col-dos button:hover {
-  background-color: #00ffff;
+  background-color: #D4AF37;
   transform: scale(1.05);
 }
 .col-dos img{
