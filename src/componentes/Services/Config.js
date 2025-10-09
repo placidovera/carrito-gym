@@ -67,8 +67,22 @@ const productosGym = [
   idCat: "botellas",
   descripcion: "Aperitivo Gancia Spritz | Peso Neto: 1.3 kg | Volumen: 950 ml | Aperitivo a base de vino blanco, con notas cítricas y amargas, ideal para preparar cócteles refrescantes."
 },
-
-
+{
+  "nombre": "Red Bitter",
+  "precio": 12000,
+  "stock": 85,
+  "img": "/imagenes/redBitter.png",
+  "idCat": "botellas",
+  "descripcion": "Aperitivo amargo con notas herbales | Peso Neto: 0.750 kg | Volumen: 750 ml | Ideal para cócteles y brindis"
+},
+{
+  "nombre": "Vodka Skyy",
+  "precio": 18000,
+  "stock": 120,
+  "img": "/imagenes/vodkaSky.png",
+  "idCat": "botellas",
+  "descripcion": "Vodka premium de sabor suave y puro | Peso Neto: 1 kg | Volumen: 1 L | Ideal para coctelería y consumo directo"
+}
 ]
 
 import { collection,doc,writeBatch } from "firebase/firestore";

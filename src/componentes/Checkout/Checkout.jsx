@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import "./Checkout.css";
 import { db } from "../Services/Config";
-import { addDoc, collection, updateDoc, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, runTransaction } from "firebase/firestore";
 import Confetti from "react-confetti";
 import { Link } from "react-router-dom";
 
@@ -25,6 +25,7 @@ const Checkout = () => {
 
   const manejadorFormulario = async (event) => {
     event.preventDefault();
+    setError(""); // Limpiar errores previos
 
     if (!nombre || !apellido || !telefono || !direccion) {
       setError("Por favor complete todos los campos");
@@ -39,7 +40,7 @@ const Checkout = () => {
       items: carrito.map((producto) => ({
         id: producto.item.id,
         nombre: producto.item.nombre,
-        descripcion: producto.item.descripcion || "", // agregamos la descripción
+        descripcion: producto.item.descripcion || "",
         cantidad: producto.cantidad,
         precio: producto.item.precio,
       })),
@@ -48,15 +49,24 @@ const Checkout = () => {
     };
 
     try {
-      // Actualizar stock
+      // Actualizar stock usando transacciones
       await Promise.all(
         orden.items.map(async (productoOrden) => {
           const productoRef = doc(db, "productos", productoOrden.id);
-          const productoDoc = await getDoc(productoRef);
-          const stockActual = productoDoc.data().stock;
 
-          await updateDoc(productoRef, {
-            stock: stockActual - productoOrden.cantidad,
+          await runTransaction(db, async (transaction) => {
+            const productoDoc = await transaction.get(productoRef);
+            if (!productoDoc.exists()) throw `El producto ${productoOrden.nombre} no existe`;
+
+            const stockActual = productoDoc.data().stock;
+
+            if (stockActual < productoOrden.cantidad) {
+              throw `No hay suficiente stock de ${productoOrden.nombre} (Disponible: ${stockActual})`;
+            }
+
+            transaction.update(productoRef, {
+              stock: stockActual - productoOrden.cantidad,
+            });
           });
         })
       );
@@ -76,7 +86,7 @@ const Checkout = () => {
       enviarWhatsApp("543434577393", mensajeWhatsApp); // reemplaza con tu número
     } catch (err) {
       console.log("Error al crear la orden:", err);
-      setError("Se produjo un error al crear la orden!!");
+      setError(typeof err === "string" ? err : "Se produjo un error al crear la orden!");
     }
   };
 
